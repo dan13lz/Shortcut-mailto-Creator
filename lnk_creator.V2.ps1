@@ -20,6 +20,7 @@ Function Set-LnkDesktop {
     $Shortcut.Save()  
 }
 #<Create_log>
+Start-Transcript -Path "$user\AppData\Local\Temp\lnk_creator_logs\PS_Transcript.log" -Force
 $user = $env:USERPROFILE
 $date = Get-Date -Format "HH:mm:ss dd/MM/yyyy" | ForEach-Object { $_ -replace ":", "-" }
 $path_log_NotFound = "$user\AppData\Local\Temp\lnk_creator_logs\NotReachableHosts_$date.log" <#-----------offline hosts list-----------#>
@@ -68,5 +69,6 @@ While ($line_number -notlike $PC_count){
 } #end while
 set-Content $path_nextHop $path_log_NotFound
 [Console]::outputEncoding 
-
+Stop-Transcript
 #notepad $path_log_Found
+#notepad "$user\AppData\Local\Temp\lnk_creator_logs\PS_Transcript.log"
