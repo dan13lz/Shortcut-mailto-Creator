@@ -18,7 +18,7 @@ Function Set-LnkDesktop {
     $Shortcut.TargetPath = $MailSubject
     $Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
     $Shortcut.Save()  
-}
+} 
 #<Create_log>
 Start-Transcript -Path "$user\AppData\Local\Temp\lnk_creator_logs\PS_Transcript.log" -Force
 $user = $env:USERPROFILE
