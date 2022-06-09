@@ -40,6 +40,10 @@ $line_number = 0
 $PC_name = 0        
 While ($line_number -notlike $PC_count){
     $PC_name = $PC_list[$line_number]   
+    if((Get-ADComputer -Identity $PC_name -Property * | Select-object -ExpandProperty Enabled) -le "True"){
+
+    }
+
     $source = 'mailto:'+$email_adress+'&subject=ой/IP: '+$PC_name+';'
     $check_connect = Test-Connection -ComputerName $PC_name -Quiet -Count 1 -ErrorAction SilentlyContinue
     if($check_connect){
