@@ -19,6 +19,7 @@ Function Set-LnkDesktop {
     $Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
     $Shortcut.Save()  
 } 
+
 #<Create_log>
 Start-Transcript -Path "$user\AppData\Local\Temp\lnk_creator_logs\PS_Transcript.log" -Force
 $user = $env:USERPROFILE
@@ -42,7 +43,7 @@ While ($line_number -notlike $PC_count){
     $PC_name = $PC_list[$line_number]   
     $source = 'mailto:'+$email_adress+'&subject=ой/IP: '+$PC_name+';'
     $check_connect = Test-Connection -ComputerName $PC_name -Quiet -Count 1 -ErrorAction SilentlyContinue
-    if($check_connect){
+    if($check_connect -and (Get-ADComputer -Identity $PC_name -Property * | Select-object -ExpandProperty Enabled)){
         $desktop_search = (Get-ChildItem "\\$PC_name\c$\Users\" -Recurse -Include "Desktop").FullName 
         $check_os = Get-ADComputer -Identity $PC_name -Property * | Select-object -ExpandProperty OperatingSystem  
         if($check_os -like '*10*'){
