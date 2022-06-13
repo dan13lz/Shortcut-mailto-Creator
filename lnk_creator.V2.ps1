@@ -1,6 +1,6 @@
-$OU_target = "OU=TEST,OU=IT,OU=M47,OU=MAJOR,DC=aamajor,DC=local"  #Здесь между кавычек указываем подразделение с ПК, на которых хотим создать ярлыки пользователям(Для windows 10 и windows 7);
-$email_adress = "itsupportmkad@info.local"       #Указываем наш эл. адрес;
-$lnk_name = "Заявка в IT MKAD"       #Название ярлыков;
+$OU_target = "OU=test,OU=it,DC=org,DC=local"  #Г‡Г¤ГҐГ±Гј Г¬ГҐГ¦Г¤Гі ГЄГ ГўГ»Г·ГҐГЄ ГіГЄГ Г§Г»ГўГ ГҐГ¬ ГЇГ®Г¤Г°Г Г§Г¤ГҐГ«ГҐГ­ГЁГҐ Г± ГЏГЉ, Г­Г  ГЄГ®ГІГ®Г°Г»Гµ ГµГ®ГІГЁГ¬ Г±Г®Г§Г¤Г ГІГј ГїГ°Г«Г»ГЄГЁ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«ГїГ¬(Г„Г«Гї windows 10 ГЁ windows 7);
+$email_adress = "itsupport@info.local"       #Г“ГЄГ Г§Г»ГўГ ГҐГ¬ Г­Г Гё ГЅГ«. Г Г¤Г°ГҐГ±;
+$lnk_name = "Submit to IT"       #ГЌГ Г§ГўГ Г­ГЁГҐ ГїГ°Г«Г»ГЄГ®Гў;
 
 ######################################################################################################################################
 [Console]::outputEncoding = [System.Text.Encoding]::GetEncoding('cp866')
@@ -41,7 +41,7 @@ $line_number = 0
 $PC_name = 0        
 While ($line_number -notlike $PC_count){
     $PC_name = $PC_list[$line_number]   
-    $source = 'mailto:'+$email_adress+'&subject=ПК/IP: '+$PC_name+';'
+    $source = 'mailto:'+$email_adress+'&subject=ГЏГЉ/IP: '+$PC_name+';'
     $check_connect = Test-Connection -ComputerName $PC_name -Quiet -Count 1 -ErrorAction SilentlyContinue
     if($check_connect -and (Get-ADComputer -Identity $PC_name -Property * | Select-object -ExpandProperty Enabled)){
         $desktop_search = (Get-ChildItem "\\$PC_name\c$\Users\" -Recurse -Include "Desktop").FullName 
